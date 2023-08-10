@@ -4,7 +4,6 @@
       <button
         type="button"
         class="w3-button w3-round w3-blue-gray"
-        v-on:click="fnWrite"
       >
         등록
       </button>
@@ -19,10 +18,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(row, idx) in list" :key="idx">
+        <tr
+          v-for="(row, idx) in list"
+          :key="idx"
+        >
           <td>{{ row.idx }}</td>
           <td>
-            <a v-on:click="fnView(`${row.idx}`)">{{ row.title }}</a>
+            <a @click="fnView(`${row.idx}`)">{{ row.title }}</a>
           </td>
           <td>{{ row.author }}</td>
           <td>{{ row.created_at }}</td>
@@ -30,52 +32,50 @@
       </tbody>
     </table>
     <div
-      class="pagination w3-bar w3-padding-16 w3-small"
       v-if="paging.total_list_cnt > 0"
+      class="pagination w3-bar w3-padding-16 w3-small"
     >
       <span class="pg">
         <a
           href="javascript:;"
-          @click="fnPage(1)"
           class="first w3-button w3-border"
-          >&lt;&lt;</a
-        >
+          @click="fnPage(1)"
+        >&lt;&lt;</a>
         <a
-          href="javascript:;"
           v-if="paging.start_page > 10"
-          @click="fnPage(`${paging.start_page - 1}`)"
+          href="javascript:;"
           class="prev w3-button w3-border"
-          >&lt;</a
-        >
+          @click="fnPage(`${paging.start_page - 1}`)"
+        >&lt;</a>
         <template v-for="(n, index) in paginavigation()">
           <template v-if="paging.page == n">
-            <strong class="w3-button w3-border w3-green" :key="index">{{
+            <strong
+              :key="index"
+              class="w3-button w3-border w3-green"
+            >{{
               n
             }}</strong>
           </template>
           <template v-else>
             <a
+              :key="index"
               class="w3-button w3-border"
               href="javascript:;"
               @click="fnPage(`${n}`)"
-              :key="index"
-              >{{ n }}</a
-            >
+            >{{ n }}</a>
           </template>
         </template>
         <a
-          href="javascript:;"
           v-if="paging.total_page_cnt > paging.end_page"
-          @click="fnPage(`${paging.end_page + 1}`)"
+          href="javascript:;"
           class="next w3-button w3-border"
-          >&gt;</a
-        >
+          @click="fnPage(`${paging.end_page + 1}`)"
+        >&gt;</a>
         <a
           href="javascript:;"
-          @click="fnPage(`${paging.total_page_cnt}`)"
           class="last w3-button w3-border"
-          >&gt;&gt;</a
-        >
+          @click="fnPage(`${paging.total_page_cnt}`)"
+        >&gt;&gt;</a>
       </span>
     </div>
   </div>
@@ -102,17 +102,6 @@ export default {
         total_list_cnt: 0,
         total_page_cnt: 0,
       }, //페이징 데이터
-      page: this.$route.query.page ? this.$route.query.page : 1,
-      size: this.$route.query.size ? this.$route.query.size : 10,
-      keyword: this.$route.query.keyword,
-      paginavigation: function () {
-        //페이징 처리 for문 커스텀
-        let pageNumber = []; //;
-        let start_page = this.paging.start_page;
-        let end_page = this.paging.end_page;
-        for (let i = start_page; i <= end_page; i++) pageNumber.push(i);
-        return pageNumber;
-      },
     };
   },
   mounted() {
