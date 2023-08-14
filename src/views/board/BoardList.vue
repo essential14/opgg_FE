@@ -1,10 +1,7 @@
 <template>
   <div class="board-list">
     <div class="common-buttons">
-      <button
-        type="button"
-        class="w3-button w3-round w3-blue-gray"
-      >
+      <button type="button" class="w3-button w3-round w3-blue-gray">
         등록
       </button>
     </div>
@@ -18,10 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          v-for="(row, idx) in list"
-          :key="idx"
-        >
+        <tr v-for="(row, idx) in list" :key="idx">
           <td>{{ row.idx }}</td>
           <td>
             <a @click="fnView(`${row.idx}`)">{{ row.title }}</a>
@@ -40,19 +34,18 @@
           href="javascript:;"
           class="first w3-button w3-border"
           @click="fnPage(1)"
-        >&lt;&lt;</a>
+          >&lt;&lt;</a
+        >
         <a
           v-if="paging.start_page > 10"
           href="javascript:;"
           class="prev w3-button w3-border"
           @click="fnPage(`${paging.start_page - 1}`)"
-        >&lt;</a>
+          >&lt;</a
+        >
         <template v-for="(n, index) in paginavigation()">
           <template v-if="paging.page == n">
-            <strong
-              :key="index"
-              class="w3-button w3-border w3-green"
-            >{{
+            <strong :key="index" class="w3-button w3-border w3-green">{{
               n
             }}</strong>
           </template>
@@ -62,7 +55,8 @@
               class="w3-button w3-border"
               href="javascript:;"
               @click="fnPage(`${n}`)"
-            >{{ n }}</a>
+              >{{ n }}</a
+            >
           </template>
         </template>
         <a
@@ -70,12 +64,14 @@
           href="javascript:;"
           class="next w3-button w3-border"
           @click="fnPage(`${paging.end_page + 1}`)"
-        >&gt;</a>
+          >&gt;</a
+        >
         <a
           href="javascript:;"
           class="last w3-button w3-border"
           @click="fnPage(`${paging.total_page_cnt}`)"
-        >&gt;&gt;</a>
+          >&gt;&gt;</a
+        >
       </span>
     </div>
   </div>
@@ -117,13 +113,13 @@ export default {
           created_at: "작성일시1",
         },
         {
-          idx: 1,
+          idx: 2,
           title: "제목1",
           author: "작성자1",
           created_at: "작성일시1",
         },
         {
-          idx: 1,
+          idx: 3,
           title: "제목1",
           author: "작성자1",
           created_at: "작성일시1",

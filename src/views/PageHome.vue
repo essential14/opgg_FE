@@ -1,18 +1,16 @@
-<!-- PageHome.vue -->
 <template>
-  <div class="home">
-    <PageMain />
+  <div class="main">
+    <input type="text" name="query" value="" />
+    <button type="submit">검색</button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import PageMain from "@/components/PageMain.vue";
-
-export default {
-  name: "PageHome",
-  components: {
-    PageMain,
-  },
-};
+export default {};
 </script>
+
+<style>
+h3 {
+  margin: 40px 0 0;
+}
+</style>

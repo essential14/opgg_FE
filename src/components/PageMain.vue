@@ -1,20 +1,17 @@
 <template>
-  <div class="main">
-    <input
-      type="text"
-      name="query"
-      value=""
-    >
-    <button type="submit">
-      검색
-    </button>
+  <div class="Main">
+    <PageHome />
   </div>
 </template>
 
-<script></script>
+<script>
+// @ is an alias to /src
+import PageHome from "@/views/PageHome.vue";
 
-<style>
-h3 {
-  margin: 40px 0 0;
-}
-</style>
+export default {
+  name: "PageMain",
+  components: {
+    PageHome,
+  },
+};
+</script>
