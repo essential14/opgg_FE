@@ -1,17 +1,17 @@
 <template>
   <div class="Main">
-    <PageHome />
+    <PageSearch />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import PageHome from "@/views/PageHome.vue";
+import PageSearch from "@/views/PageSearch.vue";
 
 export default {
   name: "PageMain",
   components: {
-    PageHome,
+    PageSearch,
   },
 };
 </script>
