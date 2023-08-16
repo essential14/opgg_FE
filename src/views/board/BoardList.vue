@@ -1,7 +1,11 @@
 <template>
   <div class="board-list">
     <div class="common-buttons">
-      <button type="button" class="w3-button w3-round w3-blue-gray">
+      <button
+        type="button"
+        class="w3-button w3-round w3-blue-gray"
+        @click="handleWrite"
+      >
         등록
       </button>
     </div>
@@ -104,6 +108,9 @@ export default {
     this.fnGetList();
   },
   methods: {
+    handleWrite() {
+      this.$router.push("/board/write");
+    },
     fnGetList() {
       this.list = [
         {

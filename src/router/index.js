@@ -1,7 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 import PageHome from "@/views/PageHome.vue";
-import BoardList from "@/views/board/BoardList.vue";
 import PageJoin from "@/views/PageJoin.vue";
+import BoardList from "@/views/board/BoardList.vue";
+import BoardUpdate from "@/views/board/BoardUpdate.vue";
+import BoardWrite from "@/views/board/BoardWrite.vue";
+import BoardDetail from "@/views/board/BoardDetail.vue";
+import PageSearchDetail from "@/views/search/PageSearchDetail.vue";
 const routes = [
   {
     path: "/",
@@ -26,6 +30,26 @@ const routes = [
     path: "/join",
     name: "PageJoin",
     component: PageJoin,
+  },
+  {
+    path: "/board/:id",
+    name: "BoardDetail",
+    component: BoardDetail,
+  },
+  {
+    path: "/board/update",
+    name: "BoardUpdate",
+    component: BoardUpdate,
+  },
+  {
+    path: "/board/write",
+    name: "BoardWrite",
+    component: BoardWrite,
+  },
+  {
+    path: "/search/detail",
+    name: "PageSearchDetail",
+    component: PageSearchDetail,
   },
 ];
 

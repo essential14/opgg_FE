@@ -1,12 +1,18 @@
 <template>
   <div class="main">
     <input type="text" name="query" value="" />
-    <button type="submit">검색</button>
+    <button @click="handleSeach">검색</button>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    handleSeach() {
+      this.$router.push("search/detail");
+    },
+  },
+};
 </script>
 
 <style>

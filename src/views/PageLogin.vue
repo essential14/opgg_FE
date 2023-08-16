@@ -1,10 +1,6 @@
-<!-- PageLogin.vue -->
 <template>
   <div class="login">
-    <form
-      name="login"
-      @submit.prevent="handleLogin"
-    >
+    <form name="login" @submit.prevent="handleLogin">
       <div class="input-group">
         <label for="user_ID">ID</label>
         <input
@@ -12,7 +8,8 @@
           type="text"
           name="user_ID"
           placeholder="아이디 입력"
-        >
+          v-model="user_ID"
+        />
       </div>
 
       <div class="input-group">
@@ -22,12 +19,11 @@
           type="password"
           name="user_PW"
           placeholder="비밀번호 입력"
-        >
+          v-model="user_PW"
+        />
       </div>
 
-      <button type="submit">
-        로그인
-      </button>
+      <button type="submit">로그인</button>
     </form>
   </div>
 </template>
@@ -37,9 +33,9 @@ export default {
   methods: {
     handleLogin() {
       // 로그인 처리 로직 (예: axios로 서버에 POST 요청 등)
-
       // 로그인 성공 시, PageHome으로 이동
       this.$router.push("/");
+      console.log(this.user_ID, this.user_PW);
     },
   },
 };

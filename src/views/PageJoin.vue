@@ -1,9 +1,6 @@
 <template>
   <div class="join">
-    <form
-      name="jogin "
-      @submit.prevent="handlejoin"
-    >
+    <form name="jogin " @submit.prevent="handlejoin">
       <div class="input-group">
         <label for="user_ID">ID</label>
         <input
@@ -11,20 +8,20 @@
           type="text"
           name="user_ID"
           placeholder="아이디 입력"
-        >
-        <button type="button">
-          중복 확인
-        </button>
+          v-model="user_ID"
+        />
+        <button type="button">중복 확인</button>
       </div>
 
       <div class="input-group">
-        <label for="user_PW1">Password</label>
+        <label for="user_PW">Password</label>
         <input
-          id="user_PW1"
+          id="user_PW"
           type="password"
-          name="user_PW1"
+          name="user_PW"
           placeholder="비밀번호 입력"
-        >
+          v-model="user_PW"
+        />
       </div>
 
       <div class="input-group">
@@ -34,22 +31,29 @@
           type="password"
           name="user_PWcheck"
           placeholder="비밀번호 확인"
-        >
+          v-model="user_PWcheck"
+        />
       </div>
-      <button type="submit">
-        확인
-      </button>
+      <button type="submit">확인</button>
     </form>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      user_ID: "",
+      user_PW: "",
+      user_PWcheck: "",
+    };
+  },
   methods: {
     handlejoin() {
       // 로그인 처리 로직 쓰기
       // 로그인 성공 시, PageHome으로 이동
       this.$router.push("/login");
+      console.log(this.user_ID, this.user_PW, this.user_PWcheck);
     },
   },
 };
