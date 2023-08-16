@@ -8,7 +8,7 @@
       <td>작성일</td>
     </tr>
     <tr>
-      <td>내용</td>
+      <td>dwqdwqdwqdqwdwqdwqd</td>
     </tr>
   </table>
   <button @click="handleList">목록</button>
@@ -17,11 +17,11 @@
 
 <script>
 export default {
-  method: {
+  methods: {
     handleList() {
       this.$router.push("/board/list");
     },
-    handleDetail() {
+    deleteDetail() {
       this.$router.push("/board/list");
     },
   },

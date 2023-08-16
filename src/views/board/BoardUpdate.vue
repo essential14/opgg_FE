@@ -1,10 +1,10 @@
 <template>
   <h1>수정 페이지 입니다.</h1>
   <div class="write">
-    <form name="login" @submit.prevent="handleWrite">
+    <form name="login" @submit.prevent="handleUpdate">
       <div class="input-group">
         <label>제목</label>
-        <input type="text" name="board_title" />
+        <input type="text" name="title" v-on="title" />
       </div>
       <div class="input-group">
         <label>파일첨부</label>
@@ -23,7 +23,7 @@
 <script>
 export default {
   methods: {
-    handleWrite() {
+    handleUpdate() {
       // 로직 구현 자리
       this.$router.push("/board/detail");
     },

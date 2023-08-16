@@ -16,7 +16,9 @@
       <td>승리/패배</td>
     </tr>
   </table>
-  <button @click="handleList">목록</button>
+  <button @click="handleList">
+    목록
+  </button>
 </template>
 
 <script>

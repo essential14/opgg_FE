@@ -2,21 +2,13 @@
 <template>
   <header>
     <div id="nav">
-      <router-link to="/">
-        Home
-      </router-link> |
-      <router-link to="/board/list">
-        커뮤니티
-      </router-link> |
-      <router-link to="/login">
-        login
-      </router-link> |
-      <router-link to="/join">
-        join
-      </router-link>
+      <router-link to="/"> Home </router-link> |
+      <router-link to="/board/list"> 커뮤니티 </router-link> |
+      <router-link to="/login"> 로그인 </router-link> |
+      <router-link to="/join"> 회원가입 </router-link>
     </div>
   </header>
-  <hr>
+  <hr />
 </template>
 
 <script>

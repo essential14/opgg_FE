@@ -2,24 +2,24 @@
   <div class="login">
     <form name="login" @submit.prevent="handleLogin">
       <div class="input-group">
-        <label for="user_ID">ID</label>
+        <label for="id">아이디</label>
         <input
-          id="user_ID"
+          id="id"
+          v-model="id"
           type="text"
-          name="user_ID"
+          name="id"
           placeholder="아이디 입력"
-          v-model="user_ID"
         />
       </div>
 
       <div class="input-group">
-        <label for="user_PW">Password</label>
+        <label for="pw">비밀번호</label>
         <input
-          id="user_PW"
+          id="pw"
+          v-model="pw"
           type="password"
-          name="user_PW"
+          name="pw"
           placeholder="비밀번호 입력"
-          v-model="user_PW"
         />
       </div>
 
@@ -81,7 +81,7 @@ input[type="password"] {
 }
 
 button {
-  padding: 10px 15px;
+  padding: 5px 5px;
   border: none;
   background-color: #007bff;
   color: white;

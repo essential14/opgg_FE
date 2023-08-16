@@ -1,7 +1,13 @@
 <template>
   <div class="main">
-    <input type="text" name="query" value="" />
-    <button @click="handleSeach">검색</button>
+    <input
+      type="text"
+      name="query"
+      value=""
+    >
+    <button @click="handleSeach">
+      검색
+    </button>
   </div>
 </template>
 
