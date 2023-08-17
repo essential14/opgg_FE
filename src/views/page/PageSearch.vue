@@ -1,6 +1,10 @@
 <template>
   <div class="main">
-    <input type="text" name="query" value="" />
+    <input
+      type="text"
+      v-model="searchQuery"
+      placeholder="소환사명을 입력해주세요."
+    />
     <button @click="handleSeach">검색</button>
   </div>
 </template>
@@ -20,3 +24,4 @@ h3 {
   margin: 40px 0 0;
 }
 </style>
+RGAPI-ec1f1683-0785-4d73-bf75-cc16e2593635

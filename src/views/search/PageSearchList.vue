@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="game in games" :key="game.champion">
+      <tr v-for="game in $store.state.games" :key="game.champion">
         <td>{{ game.champion }} |</td>
         <td>{{ game.kda }} |</td>
         <td>{{ game.result }}</td>
@@ -20,29 +20,7 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      games: [
-        {
-          champion: "아리",
-          kda: "5/0/10",
-          result: "승리",
-        },
-        {
-          champion: "야스오",
-          kda: "3/7/2",
-          result: "패배",
-        },
-        {
-          champion: "베인",
-          kda: "3/20/2",
-          result: "패배",
-        },
-      ],
-    };
-  },
-};
+export default {};
 </script>
 
 <style scoped>

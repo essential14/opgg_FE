@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
-import PageSearch from "@/views/PageSearch.vue";
-import PageJoin from "@/views/PageJoin.vue";
+import PageSearch from "@/views/page/PageSearch.vue";
+import PageJoin from "@/views/page/PageJoin.vue";
 import BoardList from "@/views/board/BoardList.vue";
 import BoardUpdate from "@/views/board/BoardUpdate.vue";
 import BoardWrite from "@/views/board/BoardWrite.vue";
@@ -13,13 +13,13 @@ const routes = [
     component: PageSearch,
   },
   {
-    path: "/login",
+    path: "/page/login",
     name: "PageLogin",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/PageLogin.vue"),
+      import(/* webpackChunkName: "about" */ "../views/page/PageLogin.vue"),
   },
   {
     path: "/board/list",
@@ -27,7 +27,7 @@ const routes = [
     component: BoardList,
   },
   {
-    path: "/join",
+    path: "/page/join",
     name: "PageJoin",
     component: PageJoin,
   },

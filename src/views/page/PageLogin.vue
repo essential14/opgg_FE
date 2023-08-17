@@ -3,22 +3,14 @@
     <form name="login" @submit.prevent="handleLogin">
       <div class="input-group">
         <label for="id">아이디</label>
-        <input
-          id="id"
-          v-model="id"
-          type="text"
-          name="id"
-          placeholder="아이디 입력"
-        />
+        <input v-model="signup.id" type="text" placeholder="아이디 입력" />
       </div>
 
       <div class="input-group">
         <label for="pw">비밀번호</label>
         <input
-          id="pw"
-          v-model="pw"
+          v-model="signup.password"
           type="password"
-          name="pw"
           placeholder="비밀번호 입력"
         />
       </div>
@@ -29,13 +21,28 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
+  computed: {
+    ...mapState({
+      signup: (state) => state.signup,
+    }),
+  },
   methods: {
     handleLogin() {
-      // 로그인 처리 로직 (예: axios로 서버에 POST 요청 등)
-      // 로그인 성공 시, PageHome으로 이동
-      this.$router.push("/");
-      console.log(this.user_ID, this.user_PW);
+      if (this.signup.id == "") {
+        alert("아이디를 입력해주세요.");
+        return;
+      }
+      if (this.signup.password === "") {
+        alert("비밀번호를 입력하세요.");
+        return;
+      }
+
+      alert("로그인 되었습니다.");
+      console.log(this.$store.state.user_ID, this.$store.state.user_PW);
+      this.$router.push("/board/list");
     },
   },
 };

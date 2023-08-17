@@ -8,7 +8,7 @@
       <td>작성일</td>
     </tr>
     <tr>
-      <td>dwqdwqdwqdqwdwqdwqd</td>
+      <td>내용</td>
     </tr>
   </table>
   <button @click="handleList">목록</button>
