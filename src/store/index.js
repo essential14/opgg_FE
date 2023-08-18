@@ -111,9 +111,12 @@ export default createStore({
     async goLogin(context) {
       console.log("API 호출 시작");
       axios
-        .post("/api/page/login", context.state.login)
+        .post("/api/page/login", {
+          id: context.state.login.loginId,
+          password: context.state.login.loginPassword,
+        })
         .then((res) => {
-          context.commit("setLogin", res.value);
+          context.commit("setLogin", res.data);
           console.log("API 호출 성공", context.state.login);
         })
         .catch((error) => {
