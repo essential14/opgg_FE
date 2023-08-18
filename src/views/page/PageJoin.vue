@@ -67,14 +67,12 @@ export default {
       }
       alert("회원가입이 완료 되었습니다.");
       this.$store.dispatch("saveJoinInfo");
-      this.$store.commit("resetSignup");
-      console.log("리셋 확인 : " + this.signup);
       this.$router.push("/page/login");
     },
 
     async handleIdCheck() {
       try {
-        const res = await this.$store.dispatch("goLogin");
+        const res = await this.$store.dispatch("idChek");
         // 서버에서 받아온 데이터가 1 이면 중복
         if (res.data == 1) {
           alert("중복된 아이디 입니다.");

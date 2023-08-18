@@ -3,12 +3,21 @@
     <form name="login" @submit.prevent="handleLogin">
       <div class="input-group">
         <label for="id">아이디</label>
-        <input v-model="id" type="text" placeholder="아이디 입력" />
+        <input
+          :value="login.loginId"
+          @input="updateLoginId"
+          placeholder="아이디 입력"
+        />
       </div>
 
       <div class="input-group">
         <label for="pw">비밀번호</label>
-        <input v-model="password" type="password" placeholder="비밀번호 입력" />
+        <input
+          :value="login.loginPassword"
+          @input="updateLoginPassword"
+          type="password"
+          placeholder="비밀번호 입력"
+        />
       </div>
 
       <button type="submit">로그인</button>
@@ -26,18 +35,19 @@ export default {
     }),
   },
   methods: {
+    updateLoginId(event) {
+      this.$store.commit("setId", event.target.value);
+    },
+    updateLoginPassword(event) {
+      this.$store.commit("setPassword", event.target.value);
+    },
     handleLogin() {
-      if (this.login.id == "") {
-        alert("아이디를 입력해주세요.");
+      if (login.loginId == "" || login.loginPassword == "") {
+        alert("아이디와 비밀번호를 모두 입력해주세요.");
         return;
       }
-      if (this.login.password === "") {
-        alert("비밀번호를 입력하세요.");
-        return;
-      }
-
+      this.$store.dispatch("goLogin");
       alert("로그인 되었습니다.");
-      console.log(this.$store.state.user_ID, this.$store.state.user_PW);
       this.$router.push("/board/list");
     },
   },

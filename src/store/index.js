@@ -11,8 +11,8 @@ export default createStore({
       pwCheck: "",
     },
     login: {
-      login: "",
-      password: "",
+      loginId: "",
+      loginPassword: "",
     },
 
     lists: [
@@ -67,18 +67,22 @@ export default createStore({
     setSignup(state, data) {
       state.signup = data;
     },
-    setLogin(state, data) {
-      state.login = data;
+    setId(state, value) {
+      state.login.loginId = value;
     },
-    resetSignup(state) {
-      state.signup = {
-        name: "",
-        birthday: "",
-        id: "",
-        password: "",
-        pwCheck: "",
-      };
+    setPassword(state, value) {
+      state.login.loginPassword = value;
     },
+
+    // resetSignup(state) {  signup data 저장X 주석 처리
+    //   state.signup = {
+    //     name: "",
+    //     birthday: "",
+    //     id: "",
+    //     password: "",
+    //     pwCheck: "",
+    //   };
+    // },
   },
   actions: {
     saveJoinInfo(context) {
@@ -93,18 +97,28 @@ export default createStore({
           console.error("API 호출 실패", error);
         });
     },
-    async goLogin(context) {
+    async idChek(context) {
       console.log("API 호출 시작");
-
       try {
         const res = await axios.post("/api/page/idcheck", context.state.signup);
-        context.commit("setLogin", res.data);
         console.log("API 호출 성공", res.data);
         return res;
       } catch (error) {
         console.error("API 호출 실패", error);
         throw error;
       }
+    },
+    async goLogin(context) {
+      console.log("API 호출 시작");
+      axios
+        .post("/api/page/login", context.state.login)
+        .then((res) => {
+          context.commit("setLogin", res.value);
+          console.log("API 호출 성공", context.state.login);
+        })
+        .catch((error) => {
+          console.error("API 호출 실패", error);
+        });
     },
   },
   modules: {},
