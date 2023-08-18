@@ -70,6 +70,15 @@ export default createStore({
     setLogin(state, data) {
       state.login = data;
     },
+    resetSignup(state) {
+      state.signup = {
+        name: "",
+        birthday: "",
+        id: "",
+        password: "",
+        pwCheck: "",
+      };
+    },
   },
   actions: {
     saveJoinInfo(context) {
@@ -77,7 +86,7 @@ export default createStore({
       axios
         .post("/api/page/join", context.state.signup)
         .then((res) => {
-          context.commit("setSignup", res.data);
+          // context.commit("setSignup", res.data); 값 저장 후 다시 회원가입 시도 시 type error 발생으로 주석 처리
           console.log("API 호출 성공", res.data);
         })
         .catch((error) => {

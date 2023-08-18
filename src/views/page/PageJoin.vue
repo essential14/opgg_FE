@@ -54,7 +54,6 @@ export default {
   },
   methods: {
     handleJoin() {
-      console(this.id, this.password);
       if (
         //입력칸 공백 확인
         this.signup.name == "" ||
@@ -68,6 +67,8 @@ export default {
       }
       alert("회원가입이 완료 되었습니다.");
       this.$store.dispatch("saveJoinInfo");
+      this.$store.commit("resetSignup");
+      console.log("리셋 확인 : " + this.signup);
       this.$router.push("/page/login");
     },
 
