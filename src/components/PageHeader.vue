@@ -6,6 +6,7 @@
       <router-link to="/board/list"> 커뮤니티 </router-link> |
       <router-link to="/page/login"> 로그인 </router-link> |
       <router-link to="/page/join"> 회원가입 </router-link>
+      {{ this.$store.state.id }}
     </div>
   </header>
   <hr />

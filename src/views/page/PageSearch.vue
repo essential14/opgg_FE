@@ -13,7 +13,7 @@
 export default {
   methods: {
     handleSeach() {
-      this.$router.push("search/list");
+      this.$router.push("/search/list");
     },
   },
 };
@@ -24,4 +24,3 @@ h3 {
   margin: 40px 0 0;
 }
 </style>
-RGAPI-ec1f1683-0785-4d73-bf75-cc16e2593635

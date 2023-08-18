@@ -3,16 +3,12 @@
     <form name="login" @submit.prevent="handleLogin">
       <div class="input-group">
         <label for="id">아이디</label>
-        <input v-model="signup.id" type="text" placeholder="아이디 입력" />
+        <input v-model="id" type="text" placeholder="아이디 입력" />
       </div>
 
       <div class="input-group">
         <label for="pw">비밀번호</label>
-        <input
-          v-model="signup.password"
-          type="password"
-          placeholder="비밀번호 입력"
-        />
+        <input v-model="password" type="password" placeholder="비밀번호 입력" />
       </div>
 
       <button type="submit">로그인</button>
@@ -26,16 +22,16 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState({
-      signup: (state) => state.signup,
+      login: (state) => state.login,
     }),
   },
   methods: {
     handleLogin() {
-      if (this.signup.id == "") {
+      if (this.login.id == "") {
         alert("아이디를 입력해주세요.");
         return;
       }
-      if (this.signup.password === "") {
+      if (this.login.password === "") {
         alert("비밀번호를 입력하세요.");
         return;
       }

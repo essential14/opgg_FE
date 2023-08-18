@@ -10,6 +10,10 @@ export default createStore({
       password: "",
       pwCheck: "",
     },
+    login: {
+      login: "",
+      password: "",
+    },
 
     lists: [
       {
@@ -51,6 +55,7 @@ export default createStore({
   },
   getters: {
     getSignup: (state) => state.signup,
+    getLogin: (state) => state.login,
   },
   mutations: {
     setLists(state, data) {
@@ -62,19 +67,35 @@ export default createStore({
     setSignup(state, data) {
       state.signup = data;
     },
+    setLogin(state, data) {
+      state.login = data;
+    },
   },
   actions: {
     saveJoinInfo(context) {
-      console.log("API 호출 시작"); // <- 로그 추가
+      console.log("API 호출 시작");
       axios
-        .post("http://localhost:8080/page/join", context.state.signup)
+        .post("/api/page/join", context.state.signup)
         .then((res) => {
           context.commit("setSignup", res.data);
-          console.log("API 호출 성공", res.data); // <- 로그 추가
+          console.log("API 호출 성공", res.data);
         })
         .catch((error) => {
           console.error("API 호출 실패", error);
         });
+    },
+    async goLogin(context) {
+      console.log("API 호출 시작");
+
+      try {
+        const res = await axios.post("/api/page/idcheck", context.state.signup);
+        context.commit("setLogin", res.data);
+        console.log("API 호출 성공", res.data);
+        return res;
+      } catch (error) {
+        console.error("API 호출 실패", error);
+        throw error;
+      }
     },
   },
   modules: {},

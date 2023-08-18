@@ -1,6 +1,6 @@
 <template>
   <div class="join">
-    <form name="jogin " @submit.prevent="handlejoin">
+    <form name="jogin " @submit.prevent="handleJoin">
       <div class="input-group">
         <label for="name">이름</label>
         <input v-model="signup.name" type="text" placeholder="이름 입력" />
@@ -17,7 +17,7 @@
       <div class="input-group">
         <label for="id">아이디</label>
         <input v-model="signup.id" type="text" placeholder="아이디 입력" />
-        <button type="button" v-if="!isOnly">중복 확인</button>
+        <button type="button" @click="handleIdCheck">중복 확인</button>
       </div>
 
       <div class="input-group">
@@ -49,11 +49,14 @@ export default {
   computed: {
     ...mapState({
       signup: (state) => state.signup,
+      login: (state) => state.login,
     }),
   },
   methods: {
-    handlejoin() {
+    handleJoin() {
+      console(this.id, this.password);
       if (
+        //입력칸 공백 확인
         this.signup.name == "" ||
         this.signup.birthday == "" ||
         this.signup.id == "" ||
@@ -66,7 +69,21 @@ export default {
       alert("회원가입이 완료 되었습니다.");
       this.$store.dispatch("saveJoinInfo");
       this.$router.push("/page/login");
-      console.log(this.signup);
+    },
+
+    async handleIdCheck() {
+      try {
+        const res = await this.$store.dispatch("goLogin");
+        // 서버에서 받아온 데이터가 1 이면 중복
+        if (res.data == 1) {
+          alert("중복된 아이디 입니다.");
+          return;
+        }
+        // 0 이면 사용 가능
+        alert("사용 가능한 아이디 입니다.");
+      } catch (error) {
+        console.error("오류", error);
+      }
     },
   },
 };
