@@ -46,8 +46,7 @@ export default {
         alert("아이디와 비밀번호를 모두 입력해주세요.");
         return;
       }
-      this.$store.dispatch("goLogin");
-      alert("로그인 되었습니다.");
+      this.$store.dispatch("saveLoginId");
       this.$router.push("/board/list");
     },
   },

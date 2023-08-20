@@ -108,7 +108,7 @@ export default createStore({
         throw error;
       }
     },
-    async goLogin(context) {
+    async saveLoginId(context) {
       console.log("API 호출 시작");
       axios
         .post("/api/page/login", {
@@ -116,8 +116,9 @@ export default createStore({
           password: context.state.login.loginPassword,
         })
         .then((res) => {
-          context.commit("setLogin", res.data);
-          console.log("API 호출 성공", context.state.login);
+          context.commit("setId", res.data.id);
+          console.log("API 호출 성공");
+          sessionStorage.setItem("id", res.data.id);
         })
         .catch((error) => {
           console.error("API 호출 실패", error);
