@@ -31,7 +31,7 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState({
-      login: (state) => state.login,
+      login: (state) => state.user.login,
     }),
   },
   methods: {

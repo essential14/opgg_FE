@@ -48,8 +48,7 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState({
-      signup: (state) => state.signup,
-      login: (state) => state.login,
+      signup: (state) => state.user.signup,
     }),
   },
   methods: {

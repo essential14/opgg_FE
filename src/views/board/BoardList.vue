@@ -19,7 +19,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(row, bno) in $store.state.lists" :key="bno">
+        <tr v-for="(row, bno) in lists" :key="bno">
           <td>{{ row.bno }}</td>
           <td>
             <a @click="getView(`${row.bno}`)">{{ row.title }}</a>
@@ -33,7 +33,14 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
+  computed: {
+    ...mapState({
+      lists: (state) => state.board.lists,
+    }),
+  },
   methods: {
     handleWrite() {
       this.$router.push("/board/write");

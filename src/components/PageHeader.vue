@@ -15,10 +15,10 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState(["isLoggedIn"]),
-    loginId() {
-      return this.$store.state.login.loginId || sessionStorage.getItem("id");
-    },
+    ...mapState({
+      isLoggedIn: (state) => state.user.isLoggedIn,
+      loginId: (state) => state.user.login.loginId,
+    }),
   },
   methods: {
     handleLogout() {
