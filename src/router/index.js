@@ -58,15 +58,4 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  const isLoggedIn = sessionStorage.getItem("id");
-
-  if (to.path === "/page/login" && isLoggedIn) {
-    alert("이미 로그인되어 있습니다.");
-    next("/");
-  } else {
-    next();
-  }
-});
-
 export default router;

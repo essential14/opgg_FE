@@ -49,7 +49,7 @@ export default {
       try {
         await this.$store.dispatch("saveLoginId");
         this.$router.push("/board/list");
-      } catch (error) {
+      } catch (e) {
         alert("로그인 실패");
       }
     },

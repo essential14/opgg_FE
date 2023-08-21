@@ -3,31 +3,26 @@
     <div id="nav">
       <router-link to="/"> Home |</router-link>
       <router-link to="/board/list"> 커뮤니티 |</router-link>
-      <router-link to="/page/login" v-show="!isLoggedIn"> 로그인 |</router-link>
-      <a href="#" v-show="isLoggedIn" @click="handleLogout"> 로그아웃 |</a>
-      <router-link to="/page/join" v-show="!isLoggedIn"> 회원가입 </router-link>
-      {{ this.$store.state.id }}
+      <router-link to="/page/login" v-if="!isLoggedIn"> 로그인 |</router-link>
+      <a href="#" v-if="isLoggedIn" @click="handleLogout"> 로그아웃 |</a>
+      <router-link to="/page/join" v-if="!isLoggedIn"> 회원가입 </router-link>
+      <p v-if="isLoggedIn">{{ loginId }}</p>
     </div>
   </header>
-  <hr />
 </template>
 
 <script>
 import { mapState } from "vuex";
-
 export default {
   computed: {
-    ...mapState(["id"]),
-    isLoggedIn() {
-      return (
-        sessionStorage.getItem("id") !== null &&
-        sessionStorage.getItem("id") !== ""
-      );
+    ...mapState(["isLoggedIn"]),
+    loginId() {
+      return this.$store.state.login.loginId || sessionStorage.getItem("id");
     },
   },
   methods: {
     handleLogout() {
-      sessionStorage.removeItem("id");
+      this.$store.commit("logout");
       this.$router.push("/page/login");
     },
   },
