@@ -18,14 +18,10 @@ const state = {
 };
 
 const getters = {
-  getSignup: (state) => state.signup,
   getLogin: (state) => state.login,
 };
 
 const mutations = {
-  setSignup(state, data) {
-    state.signup = data;
-  },
   setId(state, data) {
     state.login.loginId = data;
   },
@@ -53,8 +49,8 @@ const actions = {
         // context.commit("setSignup", res.data); 값 저장 후 다시 회원가입 시도 시 type error 발생으로 주석 처리
         console.log("API 호출 성공", res.data);
       })
-      .catch((error) => {
-        console.error("API 호출 실패", error);
+      .catch((e) => {
+        console.error("API 호출 실패", e);
       });
   },
   async idChek(context) {
@@ -68,6 +64,7 @@ const actions = {
       throw error;
     }
   },
+
   async saveLoginId(context) {
     try {
       const res = await axios.post("/api/page/login", {

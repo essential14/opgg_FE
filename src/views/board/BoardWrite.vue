@@ -3,23 +3,16 @@
     <form name="write_form" @submit.prevent="handleWrite">
       <div class="input-group">
         <label>제목</label>
-        <input id="board_title" v-model="board_title" type="text" />
+        <input id="title" v-model="title" type="text" />
       </div>
       <div class="input-group">
         <label>파일첨부</label>
-        <input id="file_up" type="file" />
+        <input id="org_file" type="file" />
       </div>
       <div class="input-group">
         <label>내용</label>
-        <textarea
-          id="user_PW"
-          v-model="board_content"
-          type="text"
-          name="board_content"
-        >
-        </textarea>
+        <textarea id="content" v-model="content"> </textarea>
       </div>
-
       <button type="submit">확인</button>
     </form>
   </div>
@@ -27,17 +20,9 @@
 
 <script>
 export default {
-  data() {
-    return {
-      board_title: "",
-      board_content: "",
-    };
-  },
   methods: {
     handleWrite() {
-      // 로직 구현 자리
       this.$router.push("/board/list");
-      console.log(this.board_title, this.board_title);
     },
   },
 };

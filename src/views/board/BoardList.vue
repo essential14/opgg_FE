@@ -36,6 +36,9 @@
 import { mapState } from "vuex";
 
 export default {
+  mounted() {
+    this.getList();
+  },
   computed: {
     ...mapState({
       lists: (state) => state.board.lists,
@@ -44,6 +47,9 @@ export default {
   methods: {
     handleWrite() {
       this.$router.push("/board/write");
+    },
+    getList() {
+      this.$store.dispatch("getBoardList");
     },
   },
 };
