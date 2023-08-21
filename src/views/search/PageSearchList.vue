@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="game in $store.state.games" :key="game.champion">
+      <tr v-for="game in games" :key="game.champion">
         <td>{{ game.champion }} |</td>
         <td>{{ game.kda }} |</td>
         <td>{{ game.result }}</td>
@@ -20,7 +20,14 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState({
+      games: (state) => state.search.games,
+    }),
+  },
+};
 </script>
 
 <style scoped>

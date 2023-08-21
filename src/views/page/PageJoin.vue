@@ -53,6 +53,19 @@ export default {
   },
   methods: {
     handleJoin() {
+      const idCheck = /^[A-Za-z0-9]{2,10}$/;
+      const pwCheck = /^[A-Za-z0-9]{4,10}$/;
+
+      if (!idCheck.test(this.signup.id)) {
+        alert("아이디는 2~10자의 영문 대소문자와 숫자로만 입력해주세요.");
+        return;
+      }
+
+      if (!pwCheck.test(this.signup.password)) {
+        alert("비밀번호는 4~10자의 영문 대소문자와 숫자로만 입력해주세요.");
+        return;
+      }
+
       if (
         //입력칸 공백 확인
         this.signup.name == "" ||
@@ -61,7 +74,7 @@ export default {
         this.signup.password == "" ||
         this.signup.pwCheck == ""
       ) {
-        alert("필수 정보를 입력해주세요.");
+        alert("정보를 입력해주세요.");
         return;
       }
       alert("회원가입이 완료 되었습니다.");

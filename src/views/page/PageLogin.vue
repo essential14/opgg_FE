@@ -6,6 +6,7 @@
         <input
           :value="login.loginId"
           @input="updateLoginId"
+          type="text"
           placeholder="아이디 입력"
         />
       </div>
@@ -89,7 +90,6 @@ label {
 
 input[type="text"],
 input[type="password"] {
-  flex: 2.5;
   padding: 8px 0px;
   border: 1px solid #ccc;
   border-radius: 4px;

@@ -10,11 +10,11 @@ const state = {
   },
 
   login: {
-    loginId: "",
+    loginId: sessionStorage.getItem("id") || "",
     loginPassword: "",
   },
 
-  isLoggedIn: false,
+  isLoggedIn: !!sessionStorage.getItem("id"),
 };
 
 const getters = {
