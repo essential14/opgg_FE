@@ -109,20 +109,20 @@ export default createStore({
       }
     },
     async saveLoginId(context) {
-      console.log("API 호출 시작");
-      axios
-        .post("/api/page/login", {
+      try {
+        const response = await axios.post("/api/page/login", {
           id: context.state.login.loginId,
           password: context.state.login.loginPassword,
-        })
-        .then((res) => {
-          context.commit("setId", res.data.id);
-          console.log("API 호출 성공");
-          sessionStorage.setItem("id", res.data.id);
-        })
-        .catch((error) => {
-          console.error("API 호출 실패", error);
         });
+
+        if (!response.data.id) {
+          throw new Error("로그인 실패");
+        }
+        context.commit("setId", response.data.id);
+        sessionStorage.setItem("id", response.data.id);
+      } catch (error) {
+        throw error;
+      }
     },
   },
   modules: {},

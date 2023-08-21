@@ -41,13 +41,17 @@ export default {
     updateLoginPassword(event) {
       this.$store.commit("setPassword", event.target.value);
     },
-    handleLogin() {
-      if (login.loginId == "" || login.loginPassword == "") {
+    async handleLogin() {
+      if (this.login.loginId == "" || this.login.loginPassword == "") {
         alert("아이디와 비밀번호를 모두 입력해주세요.");
         return;
       }
-      this.$store.dispatch("saveLoginId");
-      this.$router.push("/board/list");
+      try {
+        await this.$store.dispatch("saveLoginId");
+        this.$router.push("/board/list");
+      } catch (error) {
+        alert("로그인 실패");
+      }
     },
   },
 };
