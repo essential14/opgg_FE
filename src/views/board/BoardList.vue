@@ -3,7 +3,7 @@
     <div class="common-buttons">
       <button
         type="button"
-        class="w3-button w3-round w3-blue-gray"
+        class="w3-button w3-round w3-blue"
         @click="handleWrite"
       >
         등록

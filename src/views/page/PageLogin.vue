@@ -1,27 +1,25 @@
 <template>
   <div class="login">
-    <form name="login" @submit.prevent="handleLogin">
-      <div class="input-group">
-        <label for="id">아이디</label>
-        <input
-          :value="login.loginId"
-          @input="updateLoginId"
-          type="text"
-          placeholder="아이디 입력"
-        />
+    <form id="loginForm" @submit.prevent="handleLogin">
+      <label for="id">아이디</label>
+      <input
+        class="w3-input"
+        :value="login.loginId"
+        @input="updateLoginId"
+        type="text"
+        placeholder="아이디 입력"
+      />
+      <label for="pw">비밀번호</label>
+      <input
+        class="w3-input"
+        :value="login.loginPassword"
+        @input="updateLoginPassword"
+        type="password"
+        placeholder="비밀번호 입력"
+      />
+      <div class="common-buttons">
+        <button class="w3-button w3-blue w3-round" type="submit">로그인</button>
       </div>
-
-      <div class="input-group">
-        <label for="pw">비밀번호</label>
-        <input
-          :value="login.loginPassword"
-          @input="updateLoginPassword"
-          type="password"
-          placeholder="비밀번호 입력"
-        />
-      </div>
-
-      <button type="submit">로그인</button>
     </form>
   </div>
 </template>
@@ -59,53 +57,8 @@ export default {
 </script>
 
 <style scoped>
-.login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f7f7f7;
-}
-
-form {
-  width: 300px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-  border-radius: 5px;
-}
-
-.input-group {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-label {
-  flex: 1;
-  font-weight: bold;
-  text-align: left;
-  margin-right: 5px;
-}
-
-input[type="text"],
-input[type="password"] {
-  padding: 8px 0px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-button {
-  padding: 5px 5px;
-  border: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
+#loginForm {
+  width: 500px;
+  margin: auto;
 }
 </style>
