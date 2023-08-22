@@ -22,7 +22,7 @@
         <tr v-for="(row, bno) in lists" :key="bno">
           <td>{{ row.bno }}</td>
           <td>
-            <a @click="getView(`${row.bno}`)">{{ row.title }}</a>
+            <a @click="getBno(`${row.bno}`)">{{ row.title }}</a>
           </td>
 
           <td>{{ row.id }}</td>
@@ -46,8 +46,9 @@ export default {
     }),
   },
   methods: {
-    getView(bno) {
-      this.$router.push("/board/" + bno);
+    getBno(bno) {
+      this.$store.dispatch("getBoardDetail", bno);
+      this.$router.push("/board/bno");
     },
     handleWrite() {
       this.$router.push("/board/write");

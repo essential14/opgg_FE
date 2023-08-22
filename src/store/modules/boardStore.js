@@ -2,10 +2,22 @@ import axios from "axios";
 
 const state = {
   lists: [],
-  details: [],
+  details: {
+    bno: "",
+    board_date: "",
+    content: "",
+    fno: "",
+    id: "",
+    org_file: "",
+    stored_file: "",
+    title: "",
+    viewcount: "",
+  },
 };
 
-const getters = {};
+const getters = {
+  getDetail: (state) => state.details,
+};
 
 const mutations = {
   setLists(state, data) {
@@ -29,12 +41,13 @@ const actions = {
       });
   },
 
-  getDetail() {
+  getBoardDetail(context, id) {
     axios
-      .post("/api/board/" + bno)
+      .get("/api/board/" + id)
       .then((res) => {
         console.log("API 호출 성공", res.data);
-        bno.commit("setDetails", res.data);
+        context.commit("setDetails", res.data);
+        console.log("state.details" + state.details);
       })
       .catch((e) => {
         console.error("API 호출 실패", e);
