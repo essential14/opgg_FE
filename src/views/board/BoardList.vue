@@ -24,7 +24,8 @@
           <td>
             <a @click="getView(`${row.bno}`)">{{ row.title }}</a>
           </td>
-          <td>{{ row.writer }}</td>
+
+          <td>{{ row.id }}</td>
           <td>{{ row.board_date }}</td>
         </tr>
       </tbody>
@@ -45,6 +46,9 @@ export default {
     }),
   },
   methods: {
+    getView(bno) {
+      this.$router.push("/board/" + bno);
+    },
     handleWrite() {
       this.$router.push("/board/write");
     },
