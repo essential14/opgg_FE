@@ -32,7 +32,7 @@ const routes = [
     component: PageJoin,
   },
   {
-    path: "/board/:id",
+    path: "/board/:bno",
     name: "BoardDetail",
     component: BoardDetail,
   },

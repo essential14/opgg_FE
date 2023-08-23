@@ -41,17 +41,13 @@ const actions = {
       });
   },
 
-  getBoardDetail(context, id) {
+  getBoardDetail(context, bno) {
     axios
-      .get("/api/board/" + id)
+      .get("/api/board/" + bno)
       .then((res) => {
-        console.log("API 호출 성공", res.data);
         context.commit("setDetails", res.data);
-        console.log("state.details" + state.details);
       })
-      .catch((e) => {
-        console.error("API 호출 실패", e);
-      });
+      .catch((e) => {});
   },
 };
 

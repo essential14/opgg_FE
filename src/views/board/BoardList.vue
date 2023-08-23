@@ -22,7 +22,7 @@
         <tr v-for="(row, bno) in lists" :key="bno">
           <td>{{ row.bno }}</td>
           <td>
-            <a @click="getBno(`${row.bno}`)">{{ row.title }}</a>
+            <router-link :to="`/board/${row.bno}`">{{ row.title }}</router-link>
           </td>
 
           <td>{{ row.id }}</td>
@@ -37,7 +37,7 @@
 import { mapState } from "vuex";
 
 export default {
-  mounted() {
+  created() {
     this.getList();
   },
   computed: {
@@ -46,10 +46,6 @@ export default {
     }),
   },
   methods: {
-    getBno(bno) {
-      this.$store.dispatch("getBoardDetail", bno);
-      this.$router.push("/board/bno");
-    },
     handleWrite() {
       this.$router.push("/board/write");
     },

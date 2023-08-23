@@ -27,6 +27,12 @@
 <script>
 import { mapState } from "vuex";
 export default {
+  created() {
+    const bno = this.$route.params.bno; // 라우터 경로에서 bno 가져옴
+    if (bno) {
+      this.$store.dispatch("getBoardDetail", bno);
+    }
+  },
   computed: {
     ...mapState({
       details: (state) => state.board.details,
