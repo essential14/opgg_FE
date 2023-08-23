@@ -1,11 +1,18 @@
 <!-- PageFooter.vue -->
 <template>
-  <hr>
-  <footer>여기는 footer 자리입니다.</footer>
+  <hr />
+  <div class="footer">
+    <p>Copyright 2023. essential. All rights reserved</p>
+  </div>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style scoped></style>
+<style scoped>
+p {
+  margin-top: 2%;
+  color: rgb(156, 156, 156);
+}
+</style>

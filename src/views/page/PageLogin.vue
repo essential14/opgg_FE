@@ -1,22 +1,25 @@
 <template>
   <div class="login">
     <form id="loginForm" @submit.prevent="handleLogin">
-      <label for="id">아이디</label>
-      <input
-        class="w3-input"
-        :value="login.loginId"
-        @input="updateLoginId"
-        type="text"
-        placeholder="아이디 입력"
-      />
-      <label for="pw">비밀번호</label>
-      <input
-        class="w3-input"
-        :value="login.loginPassword"
-        @input="updateLoginPassword"
-        type="password"
-        placeholder="비밀번호 입력"
-      />
+      <div class="input-group">
+        <input
+          class="w3-input"
+          :value="login.loginId"
+          @input="updateLoginId"
+          type="text"
+          placeholder="아이디 입력"
+        />
+      </div>
+
+      <div class="input-group">
+        <input
+          class="w3-input"
+          :value="login.loginPassword"
+          @input="updateLoginPassword"
+          type="password"
+          placeholder="비밀번호 입력"
+        />
+      </div>
       <div class="common-buttons">
         <button class="w3-button w3-blue w3-round" type="submit">로그인</button>
       </div>
@@ -58,7 +61,12 @@ export default {
 
 <style scoped>
 #loginForm {
-  width: 500px;
+  width: 20%;
   margin: auto;
+  margin-top: 1%;
+}
+.input-group {
+  margin-top: 10px;
+  width: 100%;
 }
 </style>

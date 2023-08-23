@@ -2,7 +2,6 @@
   <div class="join">
     <form id="joinForm" @submit.prevent="handleJoin">
       <div class="input-group">
-        <label for="name">이름</label>
         <input
           class="w3-input"
           v-model="signup.name"
@@ -11,7 +10,6 @@
         />
       </div>
       <div class="input-group">
-        <label for="birthday">생년월일</label>
         <input
           class="w3-input"
           v-model="signup.birthday"
@@ -21,7 +19,6 @@
       </div>
 
       <div class="input-group">
-        <label for="id">아이디</label>
         <input
           class="w3-input"
           v-model="signup.id"
@@ -40,7 +37,6 @@
       </div>
 
       <div class="input-group">
-        <label for="password">비밀번호</label>
         <input
           class="w3-input"
           v-model="signup.password"
@@ -50,7 +46,6 @@
       </div>
 
       <div class="input-group">
-        <label for="pwCheck">비밀번호 확인</label>
         <input
           class="w3-input"
           v-model="signup.pwCheck"
@@ -125,11 +120,15 @@ export default {
 
 <style scoped>
 #joinForm {
-  width: 500px;
+  width: 20%;
   margin: auto;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+  margin-top: 10px;
 }
 </style>
