@@ -10,15 +10,14 @@
         />
       </div>
       <div class="input-group">
-        <input id="org_file" type="file" />
+        <input id="org_file" type="file" @change="onChangeFile" />
       </div>
       <div class="input-group">
         <textarea
           id="content"
           v-model="content"
           placeholder="내용을 입력해주세요"
-        >
-        </textarea>
+        ></textarea>
       </div>
       <button type="submit">확인</button>
     </form>
@@ -27,9 +26,25 @@
 
 <script>
 export default {
+  data() {
+    return {
+      title: "",
+      content: "",
+      file: null,
+    };
+  },
   methods: {
     handleWrite() {
+      this.$store.commit("setPost", {
+        title: this.title,
+        content: this.content,
+        org_file: this.file,
+      });
+      this.$store.dispatch("writePost");
       this.$router.push("/board/list");
+    },
+    onChangeFile(event) {
+      this.file = event.target.files[0];
     },
   },
 };

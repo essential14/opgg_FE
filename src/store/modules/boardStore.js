@@ -13,6 +13,11 @@ const state = {
     title: "",
     viewcount: "",
   },
+  posts: {
+    title: "",
+    content: "",
+    org_file: null,
+  },
 };
 
 const getters = {
@@ -26,9 +31,35 @@ const mutations = {
   setDetails(state, data) {
     state.details = data;
   },
+  setPost(state, data) {
+    state.posts = data;
+  },
 };
 
 const actions = {
+  writePost(context) {
+    const formData = new FormData();
+
+    formData.append("id", context.rootState.user.login.loginId);
+    formData.append("title", context.state.posts.title);
+    formData.append("content", context.state.posts.content);
+    formData.append("org_file", context.state.posts.org_file);
+    console.log(formData);
+    axios
+      .post("/api/board/write", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log("API 호출 성공", res.data);
+        context.commit("setPosts", res.data);
+      })
+      .catch((e) => {
+        console.error("API 호출 실패", e);
+      });
+  },
+
   getBoardList(context) {
     axios
       .get("/api/board/list", context)
