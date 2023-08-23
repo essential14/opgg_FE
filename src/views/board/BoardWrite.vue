@@ -44,7 +44,7 @@ export default {
       this.$router.push("/board/list");
     },
     onChangeFile(event) {
-      this.file = [...event.target.files];
+      this.file = event.target.files;
     },
   },
 };
