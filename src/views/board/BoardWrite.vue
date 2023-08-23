@@ -10,7 +10,7 @@
         />
       </div>
       <div class="input-group">
-        <input id="org_file" type="file" @change="onChangeFile" />
+        <input id="org_file" type="file" multiple @change="onChangeFile" />
       </div>
       <div class="input-group">
         <textarea
@@ -30,7 +30,7 @@ export default {
     return {
       title: "",
       content: "",
-      file: null,
+      file: [],
     };
   },
   methods: {
@@ -44,7 +44,7 @@ export default {
       this.$router.push("/board/list");
     },
     onChangeFile(event) {
-      this.file = event.target.files[0];
+      this.file = [...event.target.files];
     },
   },
 };

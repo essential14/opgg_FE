@@ -16,7 +16,7 @@ const state = {
   posts: {
     title: "",
     content: "",
-    org_file: null,
+    org_file: [],
   },
 };
 
