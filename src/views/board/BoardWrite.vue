@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     handleWrite() {
-      this.$store.commit("setPost", {
+      this.$store.commit("setPosts", {
         title: this.title,
         content: this.content,
         org_file: this.file,

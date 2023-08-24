@@ -4,7 +4,8 @@ const state = {
   lists: [],
   details: {
     bno: "",
-    board_date: "",
+    created_date: "",
+    updated_date: "",
     content: "",
     fno: "",
     id: "",
@@ -22,6 +23,7 @@ const state = {
 
 const getters = {
   getDetail: (state) => state.details,
+  getPost: (state) => state.posts,
 };
 
 const mutations = {
@@ -31,7 +33,7 @@ const mutations = {
   setDetails(state, data) {
     state.details = data;
   },
-  setPost(state, data) {
+  setPosts(state, data) {
     state.posts = data;
   },
 };
@@ -80,6 +82,7 @@ const actions = {
       .get("/api/board/" + bno)
       .then((res) => {
         context.commit("setDetails", res.data);
+        console.log(res.data);
       })
       .catch((e) => {});
   },

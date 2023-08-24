@@ -15,7 +15,8 @@
           <th>No</th>
           <th>제목</th>
           <th>작성자</th>
-          <th>등록일시</th>
+          <th>등록일</th>
+          <th>수정일</th>
         </tr>
       </thead>
       <tbody>
@@ -26,7 +27,8 @@
           </td>
 
           <td>{{ row.id }}</td>
-          <td>{{ row.board_date }}</td>
+          <td>{{ row.created_date }}</td>
+          <td>{{ row.updated_date }}</td>
         </tr>
       </tbody>
     </table>
