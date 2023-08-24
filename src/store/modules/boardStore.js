@@ -49,7 +49,6 @@ const actions = {
     for (let i = 0; i < context.state.posts.org_file.length; i++) {
       formData.append("uploadfiles", context.state.posts.org_file[i]);
     }
-    console.log(context.state.posts.org_file);
     axios
       .post("/api/board/write", formData, {
         headers: {
@@ -57,7 +56,6 @@ const actions = {
         },
       })
       .then((res) => {
-        console.log("API 호출 성공", res.data);
         context.commit("setPosts", res.data);
       })
       .catch((e) => {
@@ -65,9 +63,10 @@ const actions = {
       });
   },
 
-  updatePost(context) {
+  updatePost(context, payload) {
     const formData = new FormData();
 
+    formData.append("bno", context.state.details.bno);
     formData.append("id", context.rootState.user.login.loginId);
     formData.append("title", context.state.posts.title);
     formData.append("content", context.state.posts.content);
@@ -75,7 +74,6 @@ const actions = {
     for (let i = 0; i < context.state.posts.org_file.length; i++) {
       formData.append("updatefiles", context.state.posts.org_file[i]);
     }
-    console.log(context.state.posts.org_file);
     axios
       .post("/api/board/update", formData, {
         headers: {
@@ -83,7 +81,6 @@ const actions = {
         },
       })
       .then((res) => {
-        console.log("API 호출 성공", res.data);
         context.commit("setPosts", res.data);
       })
       .catch((e) => {
@@ -108,7 +105,6 @@ const actions = {
       .get("/api/board/" + bno)
       .then((res) => {
         context.commit("setDetails", res.data);
-        console.log(res.data);
       })
       .catch((e) => {});
   },
