@@ -33,6 +33,7 @@ export default {
       file: [],
     };
   },
+
   methods: {
     handleWrite() {
       this.$store.commit("setPosts", {

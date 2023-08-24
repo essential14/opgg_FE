@@ -77,7 +77,7 @@ export default {
       this.$router.push("/board/list");
     },
     handleUpdate() {
-      this.$router.push("/board/detail");
+      this.$router.push("/board/update");
     },
   },
 };
