@@ -2,18 +2,8 @@ import axios from "axios";
 
 const state = {
   lists: [],
-  details: {
-    bno: "",
-    created_date: "",
-    updated_date: "",
-    content: "",
-    fno: "",
-    id: "",
-    org_file: "",
-    stored_file: "",
-    title: "",
-    viewcount: "",
-  },
+  details: [],
+
   posts: {
     title: "",
     content: "",
@@ -40,8 +30,8 @@ const mutations = {
 
 const actions = {
   writePost(context) {
+    // 글 쓰기
     const formData = new FormData();
-
     formData.append("id", context.rootState.user.login.loginId);
     formData.append("title", context.state.posts.title);
     formData.append("content", context.state.posts.content);
@@ -63,9 +53,9 @@ const actions = {
       });
   },
 
-  updatePost(context, payload) {
+  updatePost(context) {
+    // 글 수정
     const formData = new FormData();
-
     formData.append("bno", context.state.details.bno);
     formData.append("id", context.rootState.user.login.loginId);
     formData.append("title", context.state.posts.title);
@@ -88,7 +78,31 @@ const actions = {
       });
   },
 
+  async deletePost(context) {
+    //글 삭제
+    try {
+      const res = await axios.post("/api/board/delete", context.state.details);
+      console.log("API 호출 성공", res.data);
+      return res;
+    } catch (e) {
+      console.error("API 호출 실패", error);
+      throw error;
+    }
+  },
+
+  getBoardDetail(context, bno) {
+    //글 상세
+    axios
+      .get("/api/board/" + bno)
+      .then((res) => {
+        console.log("API 호출 성공", res.data);
+        context.commit("setDetails", res.data);
+      })
+      .catch((e) => {});
+  },
+
   getBoardList(context) {
+    // 게시판 목록
     axios
       .get("/api/board/list", context)
       .then((res) => {
@@ -98,15 +112,6 @@ const actions = {
       .catch((e) => {
         console.error("API 호출 실패", e);
       });
-  },
-
-  getBoardDetail(context, bno) {
-    axios
-      .get("/api/board/" + bno)
-      .then((res) => {
-        context.commit("setDetails", res.data);
-      })
-      .catch((e) => {});
   },
 };
 

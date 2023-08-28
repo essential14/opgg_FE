@@ -42,7 +42,7 @@
       <button
         class="w3-button w3-round w3-red"
         v-if="isUser"
-        @click="deleteDetail"
+        @click="handleDelete"
       >
         삭제
       </button>
@@ -73,8 +73,19 @@ export default {
     handleList() {
       this.$router.push("/board/list");
     },
-    deleteDetail() {
-      this.$router.push("/board/list");
+    async handleDelete() {
+      try {
+        const res = await this.$store.dispatch("deletePost");
+        if (res.data == 1) {
+          alert("삭제가 완료 되었습니다.");
+          this.$router.push("/board/list");
+
+          return;
+        }
+        alert("삭제에 실패하였습니다.");
+      } catch (error) {
+        console.error("오류", error);
+      }
     },
     handleUpdate() {
       this.$router.push("/board/update");

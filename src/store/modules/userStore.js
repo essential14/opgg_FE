@@ -53,14 +53,14 @@ const actions = {
         console.error("API 호출 실패", e);
       });
   },
+
   async idChek(context) {
-    console.log("API 호출 시작");
     try {
       const res = await axios.post("/api/page/idcheck", context.state.signup);
       console.log("API 호출 성공", res.data);
       return res;
     } catch (e) {
-      console.error("API 호출 실패", error);
+      console.error("API 호출 실패", e);
       throw error;
     }
   },
