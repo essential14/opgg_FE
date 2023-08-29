@@ -5,7 +5,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import PageSearch from "@/views/PageSearch.vue";
 
 export default {

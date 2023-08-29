@@ -5,7 +5,10 @@ import BoardList from "@/views/board/BoardList.vue";
 import BoardUpdate from "@/views/board/BoardUpdate.vue";
 import BoardWrite from "@/views/board/BoardWrite.vue";
 import BoardDetail from "@/views/board/BoardDetail.vue";
+import CommentForm from "@/views/comment/CommentForm";
+import CommentList from "@/views/comment/CommentList";
 import PageSearchList from "@/views/search/PageSearchList.vue";
+
 const routes = [
   {
     path: "/",
@@ -45,6 +48,17 @@ const routes = [
     path: "/board/write",
     name: "BoardWrite",
     component: BoardWrite,
+  },
+
+  {
+    path: "/comment/list",
+    name: "CommentList",
+    component: CommentList,
+  },
+  {
+    path: "/comment/form",
+    name: "CommentForm",
+    component: CommentForm,
   },
   {
     path: "/search/list",

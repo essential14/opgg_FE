@@ -25,11 +25,7 @@
         <th>첨부파일</th>
         <td colspan="3">
           <div v-for="file in details.stored_file" :key="file">
-            <img
-              :src="'/images/' + file"
-              alt="첨부된파일 없음"
-              @load="logPath(file)"
-            />
+            <img :src="'/images/' + file" alt="첨부된파일 없음" />
           </div>
         </td>
       </tr>
@@ -52,13 +48,18 @@
       >
         삭제
       </button>
+      <CommentList />
     </div>
   </div>
 </template>
 
 <script>
+import CommentList from "@/views/comment/CommentList.vue";
 import { mapState } from "vuex";
 export default {
+  components: {
+    CommentList,
+  },
   created() {
     const bno = this.$route.params.bno; // 라우터 경로에서 bno 가져옴
     if (bno) {
@@ -76,9 +77,6 @@ export default {
     },
   },
   methods: {
-    logPath(file) {
-      console.log("/images/" + file);
-    },
     handleList() {
       this.$router.push("/board/list");
     },
@@ -88,7 +86,6 @@ export default {
         if (res.data == 1) {
           alert("삭제가 완료 되었습니다.");
           this.$router.push("/board/list");
-
           return;
         }
         alert("삭제에 실패하였습니다.");
@@ -138,5 +135,6 @@ export default {
 
 .w3-button {
   margin-left: 10px;
+  margin-top: 15px;
 }
 </style>
