@@ -2,7 +2,19 @@ import axios from "axios";
 
 const state = {
   lists: [],
-  details: [],
+  details: {
+    bno: "",
+    id: "",
+    title: "",
+    content: "",
+    viewcount: "",
+    created_date: "",
+    updated_date: "",
+    fno: "",
+    org_file: "",
+    stored_file: [],
+    group_file: "",
+  },
 
   posts: {
     title: "",
@@ -22,6 +34,7 @@ const mutations = {
   },
   setDetails(state, data) {
     state.details = data;
+    state.details.stored_file = data.fileList.map((file) => file.stored_file);
   },
   setPosts(state, data) {
     state.posts = data;

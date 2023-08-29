@@ -24,7 +24,13 @@
       <tr>
         <th>첨부파일</th>
         <td colspan="3">
-          <img :src="'/images/' + details.stored_file" alt="첨부된파일 없음" />
+          <div v-for="file in details.stored_file" :key="file">
+            <img
+              :src="'/images/' + file"
+              alt="첨부된파일 없음"
+              @load="logPath(file)"
+            />
+          </div>
         </td>
       </tr>
     </table>
@@ -70,6 +76,9 @@ export default {
     },
   },
   methods: {
+    logPath(file) {
+      console.log("/images/" + file);
+    },
     handleList() {
       this.$router.push("/board/list");
     },
