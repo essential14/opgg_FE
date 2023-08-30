@@ -1,12 +1,14 @@
 <template>
   <div class="comment-form">
-    <textarea
-      v-model="content"
-      placeholder="댓글을 입력하세요..."
-      rows="4"
-      class="comment-textarea"
-    ></textarea>
-    <button class="comment-submit" @click="handleForm">제출</button>
+    <form>
+      <input
+        v-model="content"
+        placeholder="댓글을 입력하세요."
+        rows="4"
+        class="comment-input"
+      />
+    </form>
+    <button class="comment-submit" @click="handleForm">등록</button>
   </div>
 </template>
 
@@ -19,14 +21,27 @@ export default {
     };
   },
   methods: {
-    handleForm() {
-      const commentData = {
-        content: this.content,
-        bno: this.$store.state.board.details.bno,
-        id: this.$store.state.user.login.loginId,
-      };
+    async handleForm() {
+      try {
+        const commentData = {
+          content: this.content,
+          bno: this.$store.state.board.details.bno,
+          id: this.$store.state.user.login.loginId,
+        };
+        const res = await this.$store.dispatch("writeComment", commentData);
+        if (res.data == 1) {
+          alert("댓글이 등록되었습니다.");
+          const bno = this.$route.params.bno;
+          await this.$store.dispatch("getCommentList", bno);
+          this.content = "";
+          return;
+        }
 
-      this.$store.dispatch("writeComment", commentData);
+        alert("작성에 실패하였습니다.");
+      } catch (e) {
+        console.error("오류", e);
+        alert("작성 중 오류가 발생했습니다.");
+      }
     },
   },
 };
@@ -40,7 +55,7 @@ export default {
   gap: 10px;
 }
 
-.comment-textarea {
+.comment-input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
