@@ -25,10 +25,11 @@ const mutations = {
 
 const actions = {
   async writeComment(context, commentData) {
+    // 댓글 작성
     try {
       const res = await axios.post("/api/comment/write", commentData);
       context.commit("setComments", res.data);
-      return res; // 여기서 서버 응답 반환
+      return res;
     } catch (e) {
       console.error("API 호출 실패", e);
       throw e;
@@ -36,6 +37,7 @@ const actions = {
   },
 
   getCommentList(context, bno) {
+    // 댓글 조회
     axios
       .get("/api/comment/" + bno)
       .then((res) => {

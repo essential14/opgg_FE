@@ -9,9 +9,9 @@
       >
         <div class="comment-content">{{ list.content }}</div>
         <div class="comment-actions">
-          <button class="btn-reply" @click="handlereply(list)">댓글</button>
-          <button class="btn-edit" @click="updateComment(list)">수정</button>
-          <button class="btn-delete" @click="deleteComment(list.cno)">
+          <button class="btn-reply" @click="handleReply(list)">댓글</button>
+          <button class="btn-edit" @click="handleUpdate(list)">수정</button>
+          <button class="btn-delete" @click="handleDelete(list.cno)">
             삭제
           </button>
         </div>
@@ -19,6 +19,16 @@
           <input
             class="comment-input"
             v-model="replyContent"
+            placeholder="댓글을 입력하세요."
+          />
+          <button class="btn-submitReply" @click="submitReply(list)">
+            등록
+          </button>
+        </div>
+        <div v-if="showUpInput === list.cno" class="reply-input">
+          <input
+            class="comment-input"
+            v-model="upContent"
             placeholder="댓글을 입력하세요."
           />
           <button class="btn-submitReply" @click="submitReply(list)">
@@ -44,6 +54,8 @@ export default {
     return {
       showReplyInput: null,
       replyContent: "",
+      showUpInput: null,
+      upContent: "",
     };
   },
 
@@ -61,10 +73,13 @@ export default {
   },
 
   methods: {
-    handlereply(lists) {
-      this.$store.commit("setReply", lists);
-      this.showReplyInput = //cno 값 가져 오기
+    handleReply(lists) {
+      this.showReplyInput =
         this.showReplyInput === lists.cno ? null : lists.cno;
+    },
+
+    handleUpdate(lists) {
+      this.showUpInput = this.showUpInput === lists.cno ? null : lists.cno;
     },
 
     async submitReply(parent) {
@@ -76,6 +91,7 @@ export default {
           cno: parent.cno, // 부모 댓글의 cno (선택한 댓글의 cno)
           depth: parent.depth,
           group_cno: parent.group_cno,
+          order_cno: parent.order_cno,
         };
 
         const res = await this.$store.dispatch("writeComment", replyData);
