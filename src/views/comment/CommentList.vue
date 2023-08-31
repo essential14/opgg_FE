@@ -9,7 +9,7 @@
       >
         <div class="comment-content">{{ list.content }}</div>
         <div class="comment-actions">
-          <button class="btn-reply" @click="handlereply(list.cno)">댓글</button>
+          <button class="btn-reply" @click="handlereply(list)">댓글</button>
           <button class="btn-edit" @click="updateComment(list)">수정</button>
           <button class="btn-delete" @click="deleteComment(list.cno)">
             삭제
@@ -32,64 +32,68 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 import CommentForm from "./CommentForm.vue";
 
 export default {
   components: {
     CommentForm,
   },
+
   data() {
     return {
       showReplyInput: null,
       replyContent: "",
     };
   },
+
   computed: {
     ...mapState({
       lists: (state) => state.comment.lists,
     }),
   },
+
   created() {
     const bno = this.$route.params.bno;
     if (bno) {
       this.$store.dispatch("getCommentList", bno);
     }
   },
+
   methods: {
-    ...mapActions(["deleteComment", "updateComment"]),
-    getIndentation(depth) {
-      const indentSize = 20;
-      return `${depth * indentSize}px`; // depth 1 일 때 20 만큼 들여쓰기
+    handlereply(lists) {
+      this.$store.commit("setReply", lists);
+      this.showReplyInput = //cno 값 가져 오기
+        this.showReplyInput === lists.cno ? null : lists.cno;
     },
 
-    handlereply(cno) {
-      this.showReplyInput = this.showReplyInput === cno ? null : cno;
-    },
-
-    async submitReply(comment) {
+    async submitReply(parent) {
       try {
         const replyData = {
           content: this.replyContent,
           bno: this.$store.state.board.details.bno,
           id: this.$store.state.user.login.loginId,
-          cno: comment.cno, // 대댓글의 부모 댓글의 cno
+          cno: parent.cno, // 부모 댓글의 cno (선택한 댓글의 cno)
+          depth: parent.depth,
+          group_cno: parent.group_cno,
         };
 
-        const res = await this.$store.dispatch("writeReply", replyData);
-
-        if (res.data.success) {
+        const res = await this.$store.dispatch("writeComment", replyData);
+        if (res.data == 1) {
           alert("댓글이 등록되었습니다.");
-          this.showReplyInput = null; // 대댓글 입력 창 닫기
-          this.replyContent = ""; // 입력 내용 초기화
           const bno = this.$route.params.bno;
-          await this.$store.dispatch("getCommentList", bno); // 댓글 목록 새로고침
-        } else {
-          alert("작성에 실패하였습니다.");
+          await this.$store.dispatch("getCommentList", bno);
+          this.showReplyInput = null; // 대댓글 입력 창 숨기기
+          this.replyContent = "";
         }
       } catch (e) {
-        console.error("대댓글 등록 오류", e);
+        console.error("댓글 작성 중 오류", e);
       }
+    },
+
+    getIndentation(depth) {
+      const indentSize = 20;
+      return `${depth * indentSize}px`; // depth 1 일 때 20 만큼 들여쓰기
     },
   },
 };

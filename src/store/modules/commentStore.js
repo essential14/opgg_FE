@@ -2,13 +2,13 @@ import axios from "axios";
 
 const state = {
   lists: [],
-  comments: {
+  replyData: {
     bno: "",
     content: "",
     id: "",
     cno: "",
     depth: "",
-    parent_cno: "",
+    group_cno: "",
   },
 };
 
@@ -18,8 +18,8 @@ const mutations = {
   setLists(state, data) {
     state.lists = data;
   },
-  setComments(state, data) {
-    state.comments = data;
+  setReply(state, data) {
+    state.replyData = data;
   },
 };
 
