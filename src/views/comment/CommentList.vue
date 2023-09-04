@@ -5,15 +5,13 @@
         v-for="list in lists"
         :key="list.cno"
         class="comment-item"
-        :style="{ paddingLeft: getIndentation(list.depth) }"
+        :style="{ paddingLeft: getPadding(list.depth) }"
       >
         <div class="comment-content">{{ list.content }}</div>
         <div class="comment-actions">
           <button class="btn-reply" @click="handleReply(list)">댓글</button>
           <button class="btn-edit" @click="handleUpdate(list)">수정</button>
-          <button class="btn-delete" @click="handleDelete(list.cno)">
-            삭제
-          </button>
+          <button class="btn-delete" @click="handleDelete(list)">삭제</button>
         </div>
         <div v-if="showReplyInput === list.cno" class="reply-input">
           <input
@@ -31,9 +29,7 @@
             v-model="upContent"
             placeholder="댓글을 입력하세요."
           />
-          <button class="btn-submitReply" @click="submitReply(list)">
-            등록
-          </button>
+          <button class="btn-submitReply" @click="upReply(list)">등록</button>
         </div>
       </div>
     </div>
@@ -62,6 +58,7 @@ export default {
   computed: {
     ...mapState({
       lists: (state) => state.comment.lists,
+      loginId: (state) => state.user.login.loginId,
     }),
   },
 
@@ -73,25 +70,17 @@ export default {
   },
 
   methods: {
-    handleReply(lists) {
-      this.showReplyInput =
-        this.showReplyInput === lists.cno ? null : lists.cno;
-    },
-
-    handleUpdate(lists) {
-      this.showUpInput = this.showUpInput === lists.cno ? null : lists.cno;
-    },
-
-    async submitReply(parent) {
+    async submitReply(lists) {
+      // 작성
       try {
         const replyData = {
           content: this.replyContent,
           bno: this.$store.state.board.details.bno,
           id: this.$store.state.user.login.loginId,
-          cno: parent.cno, // 부모 댓글의 cno (선택한 댓글의 cno)
-          depth: parent.depth,
-          group_cno: parent.group_cno,
-          order_cno: parent.order_cno,
+          cno: lists.cno, // 부모 댓글의 cno (선택한 댓글의 cno)
+          depth: lists.depth,
+          group_cno: lists.group_cno,
+          order_cno: lists.order_cno,
         };
 
         const res = await this.$store.dispatch("writeComment", replyData);
@@ -107,9 +96,54 @@ export default {
       }
     },
 
-    getIndentation(depth) {
-      const indentSize = 20;
-      return `${depth * indentSize}px`; // depth 1 일 때 20 만큼 들여쓰기
+    async upReply(lists) {
+      // 수정
+      try {
+        this.$store.commit("setUpComment", {
+          cno: lists.cno,
+          content: this.upContent,
+        });
+        const res = await this.$store.dispatch("updateComment");
+        if (res.data == 1) {
+          alert("수정이 완료 되었습니다.");
+          const bno = this.$route.params.bno;
+          await this.$store.dispatch("getCommentList", bno);
+          this.showUpInput = null; // 대댓글 입력 창 숨기기
+          this.upContent = "";
+        }
+      } catch (e) {
+        console.error("수정중 오류", e);
+      }
+    },
+
+    async handleDelete(lists) {
+      // 삭제
+      try {
+        const res = await this.$store.dispatch("deleteComment", {
+          cno: lists.cno,
+        });
+        if (res.data == 1) {
+          alert("삭제가 완료 되었습니다.");
+          const bno = this.$route.params.bno;
+          await this.$store.dispatch("getCommentList", bno);
+        }
+      } catch (e) {
+        console.error("삭제중 오류", e);
+      }
+    },
+
+    handleReply(lists) {
+      this.showReplyInput =
+        this.showReplyInput === lists.cno ? null : lists.cno;
+    },
+
+    handleUpdate(lists) {
+      this.showUpInput = this.showUpInput === lists.cno ? null : lists.cno;
+    },
+
+    getPadding(depth) {
+      const padding = 20;
+      return `${depth * padding}px`; // depth 1 일 때 20 만큼 들여쓰기
     },
   },
 };
