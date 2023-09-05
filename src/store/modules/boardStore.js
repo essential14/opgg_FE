@@ -15,11 +15,22 @@ const state = {
     stored_file: [],
     group_file: "",
   },
-
   posts: {
     title: "",
     content: "",
     org_file: [],
+  },
+  sort: {
+    current_page: "",
+    page_size: 5,
+    sort_by: "bno",
+    order: "asc",
+  },
+  pagination: {
+    current_page: "",
+    start_page: "",
+    end_page: "",
+    total_pages: "",
   },
 };
 
@@ -38,6 +49,9 @@ const mutations = {
   },
   setPosts(state, data) {
     state.posts = data;
+  },
+  setPagination(state, data) {
+    state.pagination = data;
   },
 };
 
@@ -117,10 +131,11 @@ const actions = {
   getBoardList(context) {
     // 게시판 목록
     axios
-      .get("/api/board/list", context)
+      .get("/api/board/list", { params: context.state.pagination })
       .then((res) => {
         console.log("API 호출 성공", res.data);
         context.commit("setLists", res.data);
+        context;
       })
       .catch((e) => {
         console.error("API 호출 실패", e);
