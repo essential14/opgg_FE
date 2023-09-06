@@ -35,8 +35,9 @@
   </div>
   <div class="pagination">
     <button
+      v-if="sortPg.current_page > 1"
       class="prev w3-button w3-border"
-      @click="changePage(current_page - 1)"
+      @click="changePage(sortPg.current_page - 1)"
     >
       이전
     </button>
@@ -55,8 +56,9 @@
     </button>
 
     <button
+      v-if="sortPg.current_page < pagination.total_pages"
       class="next w3-button w3-border"
-      @click="changePage(current_page + 1)"
+      @click="changePage(sortPg.current_page + 1)"
     >
       다음
     </button>
@@ -75,6 +77,7 @@ export default {
     ...mapState({
       lists: (state) => state.board.lists,
       pagination: (state) => state.board.pagination,
+      sortPg: (state) => state.board.sortPg,
     }),
     displayedPages() {
       let pages = [];
@@ -98,10 +101,10 @@ export default {
     changePage(page) {
       this.$store.commit("setSortPg", {
         current_page: page,
-        sort_by: "",
-        order: "",
+        sort_by: this.sortPg.sort_by,
+        order: this.sortPg.order,
       });
-      this.getList(); // 페이지가 바뀔 때마다 게시글 목록을 새로 불러옴
+      this.getList();
     },
     sort(item) {
       this.order = this.order === "asc" ? "desc" : "asc";
@@ -115,6 +118,7 @@ export default {
   },
 };
 </script>
+
 <style>
 .pagination {
   display: flex;
@@ -125,9 +129,5 @@ export default {
   margin: 0 5px;
   padding: 5px 10px;
   cursor: pointer;
-}
-.active-page {
-  background-color: #007bff;
-  color: white;
 }
 </style>

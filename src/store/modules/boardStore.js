@@ -139,7 +139,6 @@ const actions = {
         console.log("API 호출 성공", res.data);
         context.commit("setLists", res.data.lists);
         context.commit("setPagination", res.data.pagination);
-        console.log("test", state.pagination);
       })
       .catch((e) => {
         console.error("API 호출 실패", e);
