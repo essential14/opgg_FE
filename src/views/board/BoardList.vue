@@ -44,7 +44,11 @@
     <button
       v-for="(n, index) in displayedPages"
       :key="index"
-      :class="['w3-button', 'w3-border', current_page === n ? 'w3-green' : '']"
+      :class="[
+        'w3-button',
+        'w3-border',
+        pagination.current_page === n ? 'w3-green' : '',
+      ]"
       @click="changePage(n)"
     >
       {{ n }}
@@ -73,12 +77,12 @@ export default {
       pagination: (state) => state.board.pagination,
     }),
     displayedPages() {
-      let start_page = Math.floor((this.current_page - 1) / 3) * 3 + 1;
-      let end_page = start_page + 2;
-      if (end_page > this.total_pages) end_page = this.total_pages;
-
       let pages = [];
-      for (let i = start_page; i <= end_page; i++) {
+      for (
+        let i = this.pagination.start_page;
+        i <= this.pagination.end_page;
+        i++
+      ) {
         pages.push(i);
       }
       return pages;
@@ -92,14 +96,16 @@ export default {
       this.$store.dispatch("getBoardList");
     },
     changePage(page) {
-      this.$store.commit("setPagination", {
+      this.$store.commit("setSortPg", {
         current_page: page,
+        sort_by: "",
+        order: "",
       });
       this.getList(); // 페이지가 바뀔 때마다 게시글 목록을 새로 불러옴
     },
     sort(item) {
       this.order = this.order === "asc" ? "desc" : "asc";
-      this.$store.commit("setPagination", {
+      this.$store.commit("setSortPg", {
         current_page: 1,
         sort_by: item,
         order: this.order,

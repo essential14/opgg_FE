@@ -20,8 +20,8 @@ const state = {
     content: "",
     org_file: [],
   },
-  sort: {
-    current_page: "",
+  sortPg: {
+    current_page: 1,
     page_size: 5,
     sort_by: "bno",
     order: "asc",
@@ -52,6 +52,9 @@ const mutations = {
   },
   setPagination(state, data) {
     state.pagination = data;
+  },
+  setSortPg(state, data) {
+    state.sortPg = data;
   },
 };
 
@@ -129,13 +132,14 @@ const actions = {
   },
 
   getBoardList(context) {
-    // 게시판 목록
+    // 글 목록
     axios
-      .get("/api/board/list", { params: context.state.pagination })
+      .get("/api/board/list", { params: context.state.sortPg })
       .then((res) => {
         console.log("API 호출 성공", res.data);
-        context.commit("setLists", res.data);
-        context;
+        context.commit("setLists", res.data.lists);
+        context.commit("setPagination", res.data.pagination);
+        console.log("test", state.pagination);
       })
       .catch((e) => {
         console.error("API 호출 실패", e);
