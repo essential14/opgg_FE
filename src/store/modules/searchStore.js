@@ -1,23 +1,8 @@
-// import axios from "axios";
+import axios from "axios";
 
 const state = {
-  games: [
-    {
-      champion: "아리",
-      kda: "5/0/10",
-      result: "승리",
-    },
-    {
-      champion: "야스오",
-      kda: "3/7/2",
-      result: "패배",
-    },
-    {
-      champion: "베인",
-      kda: "3/20/2",
-      result: "패배",
-    },
-  ],
+  games: [],
+  summonerName: "",
 };
 
 const getters = {};
@@ -28,7 +13,18 @@ const mutations = {
   },
 };
 
-const actions = {};
+const actions = {
+  async searchSummoner(context, summonerName) {
+    try {
+      const res = await axios.post("/api/page/search", {
+        summonerName,
+      });
+      context.commit("setGames", res.data);
+    } catch (e) {
+      console.error("API 호출 실패", e);
+    }
+  },
+};
 
 export default {
   state,

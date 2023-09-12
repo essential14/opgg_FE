@@ -3,16 +3,16 @@
     <table class="w3-table-all">
       <thead>
         <tr>
-          <th>챔피언 이름</th>
+          <th>champion</th>
           <th>kda</th>
-          <th>결과</th>
+          <th>result</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="game in games" :key="game.champion">
-          <td>{{ game.champion }}</td>
-          <td>{{ game.kda }}</td>
-          <td>{{ game.result }}</td>
+          <td>{{ game.championName }}</td>
+          <td>{{ game.kill }}/{{ game.death }}/{{ game.assist }}</td>
+          <td>{{ game.win }}</td>
         </tr>
       </tbody>
     </table>
