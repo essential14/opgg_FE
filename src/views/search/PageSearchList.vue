@@ -12,7 +12,7 @@
         <tr v-for="game in games" :key="game.champion">
           <td>{{ game.championName }}</td>
           <td>{{ game.kill }}/{{ game.death }}/{{ game.assist }}</td>
-          <td>{{ game.win }}</td>
+          <td><span v-if="game.win">Win</span> <span v-else>Lose</span></td>
         </tr>
       </tbody>
     </table>
